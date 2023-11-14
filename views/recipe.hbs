@@ -1,0 +1,137 @@
+{{! header }}
+<nav
+  class="md:flex md:justify-between md:items-center w-full py-4 bg-gray-700 px-10"
+>
+  <div class="">
+    <a href="/">
+      <img class="h-10" src="/images/placeholder.png" alt="Logo" />
+    </a>
+  </div>
+
+  <a href="/" class="flex-grow text-gray-100 ml-10">
+    <h1 class="text-2xl uppercase flex-grow">Family Recipes</h1>
+  </a>
+
+  <div class="flex items-center">
+
+    <a
+      href="/"
+      class="border-b-2 border-transparent text-medium text-gray-100 uppercase mx-7 pt-1"
+    >Overview</a>
+    <a
+      href="/upload"
+      class="border-b-2 border-transparent text-medium text-gray-100 uppercase mx-7 pt-1"
+    >Upload</a>
+  </div>
+</nav>
+
+{{! main }}
+<main>
+  {{! Page title section }}
+  <div
+    class="flex flex-col items-center justify-around"
+    style=" background-image: url(/images/background.jpg); background-repeat: no-repeat; background-size:cover; min-height: 40vh; background-position:right top ;"
+  >
+
+    <h1
+      class="text-5xl font-bold uppercase text-gray-100 pb-3 pt-20"
+      style="letter-spacing:0.9rem;"
+    >Overview</h1>
+
+    {{! search bar }}
+    <form method="GET" action="#" class="w-2/5">
+      <input
+        type="text"
+        name="search"
+        placeholder="Search..."
+        value=""
+        class="block w-full mb-20 py-2 pl-3 text-medium text-gray-700 border border-gray-100 rounded-2xl bg-gray-100 focus:ring-blue-500 focus:border-gray-700"
+      />
+    </form>
+
+  </div>
+
+  {{! recipe }}
+  <div class="grid sm:grid-cols-1 md:grid-cols-6 gap-4 w-4/5 mx-auto">
+
+    <div class="flex w-4/5 m-auto">
+      {{! left part }}
+      <div class="w-2/5 pr-10">
+        {{! image }}
+        <img
+          class="object-cover w-full h-96 md:h-auto md:w-48 rounded-xl"
+          src="/images/placeholder.png"
+          alt=""
+        />
+      </div>
+
+      {{! right part }}
+      <div class="flex flex-col w-3/5 pl-10">
+        <h2>Title</h2>
+
+        {{!-- details --}}
+        <div class="flex mb-3">
+          <div class="flex items-center">
+            <img src="images/icon_user.png" alt="" width="15rem" class="mr-2" />
+            <p
+              class="mr-5 font-normal text-gray-500 dark:text-gray-400"
+            >Author</p>
+          </div>
+          <div class="flex items-center">
+            <img
+              src="images/icon_clock.png"
+              alt=""
+              width="15rem"
+              class="mr-2"
+            />
+            <p
+              class="mr-5 font-normal text-gray-500 dark:text-gray-400"
+            >Time</p>
+          </div>
+          <div class="flex items-center">
+            <img
+              src="images/icon_speedometer.png"
+              alt=""
+              width="15rem"
+              class="mr-2"
+            />
+            <p
+              class="mr-5 font-normal text-gray-500 dark:text-gray-400"
+            >Difficulty</p>
+          </div>
+
+        </div>
+
+        {{!-- ingredients --}}
+        <h3>Ingredients</h3>
+        <ul>
+          <li>ingredient 1</li>
+          <li>ingredient 2</li>
+          <li>ingredient 3</li>
+        </ul>
+
+
+        {{!-- instructions --}}
+        <h3>Instructions</h3>
+        <ol>
+          <li>instruction 1</li>
+          <li>instruction 2</li>
+          <li>instruction 3</li>
+        </ol>
+
+      </div>
+    </div>
+
+  </div>
+</main>
+
+{{! scripts }}
+<script>
+  //underline the links when hovered over const links =
+  document.querySelectorAll('a'); links.forEach(link => {
+  link.addEventListener('mouseover', () => {
+  link.classList.replace('border-transparent', 'border-gray-100'); });
+  link.addEventListener('mouseout', () => {
+  link.classList.replace('border-gray-100', 'border-transparent'); }); });
+
+</script>
