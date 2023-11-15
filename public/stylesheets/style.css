@@ -6,3 +6,11 @@ body {
 a {
   color: #00B7FF;
 }
+
+.btn-default{
+  background-color:#4E6C50
+}
+
+.btn-default:hover{
+  background-color:#395144
+}

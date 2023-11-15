@@ -1,6 +1,7 @@
 {{! header }}
 <nav
-  class="md:flex md:justify-between md:items-center w-full py-4 bg-gray-700 px-10"
+  class="md:flex md:justify-between md:items-center w-full py-4 px-10"
+  style="background-color: #395144;"
 >
   <div class="">
     <a href="/">
@@ -9,123 +10,250 @@
   </div>
 
   <a href="/" class="flex-grow text-gray-100 ml-10">
-    <h1 class="text-2xl uppercase flex-grow">Family Recipes</h1>
+    <h1 class="text-2xl uppercase flex-grow"
+    style="color: #F0EBCE">Family Recipes</h1>
   </a>
 
   <div class="flex items-center">
 
     <a
       href="/"
-      class="border-b-2 border-transparent text-medium text-gray-100 uppercase mx-7 pt-1"
+      class="border-b-2 border-transparent text-medium uppercase mx-7 pt-1"
+      style="color: #F0EBCE"
     >Overview</a>
     <a
-      href="/upload"
+      href="/recipe/add"
       class="border-b-2 border-transparent text-medium text-gray-100 uppercase mx-7 pt-1"
-    >Upload</a>
+      style="color: #F0EBCE"
+    >Add Recipe</a>
   </div>
 </nav>
 
 {{! main }}
 <main>
-  {{! Page title section }}
-  <div
-    class="flex flex-col items-center justify-around"
-    style=" background-image: url(/images/background.jpg); background-repeat: no-repeat; background-size:cover; min-height: 40vh; background-position:right top ;"
-  >
-
-    <h1
-      class="text-5xl font-bold uppercase text-gray-100 pb-3 pt-20"
-      style="letter-spacing:0.9rem;"
-    >Overview</h1>
-
-    {{! search bar }}
-    <form method="GET" action="#" class="w-2/5">
-      <input
-        type="text"
-        name="search"
-        placeholder="Search..."
-        value=""
-        class="block w-full mb-20 py-2 pl-3 text-medium text-gray-700 border border-gray-100 rounded-2xl bg-gray-100 focus:ring-blue-500 focus:border-gray-700"
-      />
-    </form>
-
-  </div>
+ 
 
   {{! recipe }}
-  <div class="grid sm:grid-cols-1 md:grid-cols-6 gap-4 w-4/5 mx-auto">
+  <div
+    class="grid sm:grid-cols-1 md:grid-cols-6 gap-4 w-4/5 mx-auto my-10 "
+  >
 
-  {{!-- if successfully added reipe, show alert with success --}}
+    {{! if successfully added reipe, show alert with success }}
     {{#if success}}
-      <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-        <strong class="font-bold">Congrates!</strong>
+      <div
+        class="bg-green-100  text-green-700 px-4 py-3 rounded relative"
+        role="alert"
+      >
+        <strong class="font-bold">Congrats!</strong>
         <span class="block sm:inline">Your recipe was successfully added</span>
       </div>
     {{/if}}
 
-    <div class="flex w-4/5 m-auto">
+    <div class="flex col-span-6">
       {{! left part }}
-      <div class="w-2/5 pr-10">
+      <div class="w-2/5 flex-grow ">
         {{! image }}
         <img
-          class="object-cover w-full h-96 md:h-auto md:w-48 rounded-xl"
-          src="/images/placeholder.png"
+          class="object-cover w-full rounded-xl"
+          src="{{recipe.picture_url}}"
           alt=""
         />
-      </div>
+        <div class="mt-5 m-x-5">
+            <a href="/recipe/delete/{{recipe._id}}" class="bg-red-500 text-white border borderred-500 px-3 py-1 rounded-lg hover:bg-red-700">Delete</a>
+            <a href="/recipe/update/{{recipe._id}}" class=" text-gray-700 border border-gray-500 px-3 py-1 rounded-lg hover:bg-gray-100">Edit</a>
+        </div>
+        </div>
 
       {{! right part }}
       <div class="flex flex-col w-3/5 pl-10">
-        <h2>Title</h2>
+        <h2
+          class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white"
+            style="color: #395144;"
+        >{{recipe.title}}</h2>
 
-        {{!-- details --}}
+        {{! details }}
         <div class="flex mb-3">
           <div class="flex items-center">
-            <img src="images/icon_user.png" alt="" width="15rem" class="mr-2" />
-            <p
-              class="mr-5 font-normal text-gray-500 dark:text-gray-400"
-            >Author</p>
-          </div>
-          <div class="flex items-center">
             <img
-              src="images/icon_clock.png"
+              src="/images/icon_user.png"
               alt=""
               width="15rem"
               class="mr-2"
             />
             <p
               class="mr-5 font-normal text-gray-500 dark:text-gray-400"
-            >Time</p>
+            >{{recipe.author.name}}</p>
           </div>
           <div class="flex items-center">
             <img
-              src="images/icon_speedometer.png"
+              src="/images/icon_clock.png"
               alt=""
               width="15rem"
               class="mr-2"
             />
             <p
               class="mr-5 font-normal text-gray-500 dark:text-gray-400"
-            >Difficulty</p>
+            >{{recipe.prepTimeInMinutes}}</p>
+          </div>
+          <div class="flex items-center">
+            <img
+              src="/images/icon_speedometer.png"
+              alt=""
+              width="15rem"
+              class="mr-2"
+            />
+            <p
+              class="mr-5 font-normal text-gray-500 dark:text-gray-400"
+            >{{recipe.difficulty}}</p>
           </div>
 
         </div>
 
-        {{!-- ingredients --}}
-        <h3>Ingredients</h3>
-        <ul>
-          <li>ingredient 1</li>
-          <li>ingredient 2</li>
-          <li>ingredient 3</li>
+        {{! ingredients }}
+        <h3
+          class="mb-3 mt-6 text-4xl font-extrabold dark:text-white"
+          style="color:#AA8B56"
+        >Ingredients</h3>
+        <ul class="list-disc list-inside">
+          {{#each recipe.ingredients}}
+            <li class="w-full">{{this.name}} - {{this.quantity}}</li>
+          {{/each}}
         </ul>
 
+        {{! instructions }}
+        <h3
+          class="mb-3 mt-6 text-4xl font-extrabold dark:text-white"
+          style="color:#AA8B56"
+        >Instructions</h3>
+        <div>
+          <p>
+            {{recipe.instructions}}
+          </p>
+        </div>
 
-        {{!-- instructions --}}
-        <h3>Instructions</h3>
-        <ol>
-          <li>instruction 1</li>
-          <li>instruction 2</li>
-          <li>instruction 3</li>
-        </ol>
+        {{! Comments }}
+        {{! script for toggle menu is  }}
+        <h3
+          class="mb-3 mt-6 text-4xl font-extrabold dark:text-white"
+          style="color:#AA8B56"
+        >Discussions</h3>
+        <section class="bg-white dark:bg-gray-900 antialiased">
+          <div class="">
+
+            {{#each recipe.comments}}
+              <article
+                class="p-6 text-base bg-gray-50 rounded-xl dark:bg-gray-900 border-b border-gray-100 mb-4"
+              >
+                <footer class="flex justify-between items-center mb-2">
+                  <div class="flex items-center">
+                    {{! user }}
+                    <p
+                      class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"
+                    >
+                      {{! profile pic }}
+                      <img
+                        class="mr-2 w-6 h-6 rounded-full"
+                        src="/images/placeholder.png"
+                        alt=""
+                      />{{$this.name}}</p>
+                    {{! published on }}
+                    <p class="text-sm text-gray-600 dark:text-gray-400"><time>
+                        {{this.published_on}}</time></p>
+                  </div>
+
+                  <div class="relative" id="comment-menu">
+                    <button
+                      id="dropdownCommentButton{{this._id}}"
+                      data-dropdown-toggle="dropdownComment{{this._id}}"
+                      class="relative inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-gray-50 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                      type="button"
+                    >
+                      <svg
+                        class="w-4 h-4"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        viewBox="0 0 16 3"
+                      >
+                        <path
+                          d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"
+                        />
+                      </svg>
+                      <span class="sr-only">Comment settings</span>
+                    </button>
+                    {{! Dropdown menu }}
+                    <div
+                      id="dropdownComment{{this._id}}"
+                      class="absolute right-0 hidden z-10 w-36 bg-white rounded divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+                      role="menu"
+                      aria-orientation="vertical"
+                      aria-labelledby="comment-menu-button"
+                    >
+                      <ul
+                        class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                        aria-labelledby="dropdownMenuIconHorizontalButton"
+                      >
+
+                        <li>
+                          <form action="/comments/{{this._id}}" method="delete">
+                            <button
+                              type="submit"
+                              class="text-left w-full block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                              role="menuitem"
+                            >Remove</button>
+                          </form>
+                        </li>
+                        <li>
+                          <form action="/comments/{{this._id}}" method="update">
+                            <button
+                              type="submit"
+                              class="text-left w-full block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                              role="menuitem"
+                            >Remove</button>
+                          </form>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                </footer>
+
+                {{! body }}
+                <p
+                  class="text-gray-500 text-medium dark:text-gray-400"
+                >{{this.message}}</p>
+
+              </article>
+            {{/each}}
+
+            {{! submit comments }}
+            <form
+              action="/comments/{{recipe._id}}"
+              method="POST"
+              class="mb-6 flex flex-col items-right"
+            >
+
+              <textarea
+                id="body"
+                rows="6"
+                class="w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-300 focus:border-blue-700 dark:bg-gray-800 dark:border-gray-700"
+                placeholder="Write a comment and please remember to be nice..."
+                required
+                name="body"
+              ></textarea>
+
+              <div>
+                <button
+                  type="submit"
+                  class="btn-default inline-flex items-center py-2.5 px-4 font-medium text-center text-white  rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
+                >
+                  Post comment
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </section>
 
       </div>
     </div>
@@ -143,3 +271,13 @@
   link.classList.replace('border-gray-100', 'border-transparent'); }); });
 
 </script>
+
+
+{{!-- script for comments ... button --}}
+{{#each recipe.comments}}
+  <script>
+    document.getElementById('dropdownCommentButton{{this._id}}').addEventListener('click',
+    function() { var dropdown = document.getElementById('dropdownComment{{this._id}}');
+    dropdown.classList.toggle('hidden'); console.log(dropdown) });
+  </script>
+{{/each}}

@@ -25,8 +25,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(expressSession({secret:'max', saveUninitialized:false, resave:false}));
+app.use(express.static(path.join(__dirname, 'public'))); //needed to access files in public directory
+app.use('/uploads', express.static('uploads')); //needed to access pictures/files in uploads directory
+app.use(expressSession({secret:'max', saveUninitialized:false, resave:false})); //needed for session.success and session.errors
 
 
 app.use('/', indexRouter);
