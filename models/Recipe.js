@@ -38,6 +38,6 @@ const recipeSchema = new Schema({
 }, { collection: 'recipes' }); //specify collection name to avoid pluralization of model name
 
 var Recipe = mongoose.model('Recipe', recipeSchema); //create model from schema
-var Ingredient = mongoose.model('Ingredient', ingredientSchema); //create model from schema
 
-module.exports = {Recipe, Ingredient};
+
+module.exports = Recipe;

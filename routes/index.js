@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var {Recipe} = require('../models/Recipe.js');
+var Recipe = require('../models/Recipe.js');
 
 
 /* GET home page. and show all recipes */
@@ -12,7 +12,6 @@ router.get("/", function (req, res, next) {
     }).catch((err)=> {
       console.log(err)
     })
-
 });
 
 module.exports = router;
