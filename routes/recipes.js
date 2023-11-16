@@ -3,8 +3,7 @@ var router = express.Router();
 var { body, validationResult } = require("express-validator");
 const multer = require("multer"); //middleware for handling multipart/form-data, which is primarily used for uploading files
 const upload = multer({ dest: "uploads/recipe-pictures" }); // 'uploads/recipe-pictures/' is the directory where the files will be saved
-const { connectToDb, client } = require("../mongoDb_driver.js");
-const ObjectId = require("mongodb").ObjectId; //needed to find by id
+var Recipe = require("../models/Recipe.js");
 
 /* GET add recipe page. */
 router.get("/add", function (req, res, next) {
@@ -97,8 +96,9 @@ router.post(
         return { name: ingredient, quantity: amounts[index] };
       });
 
+      console.log(req)
       //build path to picture
-        var picturePath = req.file ? req.protocol + "://" + req.host +'/' + req.file.path : undefined;
+        var picturePath = req.file ? req.protocol + "://" + req.hostname +':' + (req.app.settings.port || process.env.PORT) +'/' + req.file.path.replace(/\\/g, '/') : undefined;
 
       //insert data into db
       var recipe = {
@@ -152,36 +152,12 @@ router.delete("/delete/:id", function (req, res, next) {
 
 /* GET individual recipe page. */
 router.get("/:id", function (req, res, next) {
-  //get id from url and convert to ObjectId (need to import ObjectId on top)
-  var recipeId = new ObjectId(req.params.id);
+  //get id from url 
+  var recipeId = req.params.id;
 
-  //create query to find recipe by id
-  findOneQuery = { _id: recipeId };
-
-  //get recipe from db based on query
-  connectToDb()
-    .then(() => {
-      //get all recipes from db
-      client
-        .db("FamilyRecipes") //db name
-        .collection("recipes") //collection name
-        .findOne(findOneQuery) //find the doc
-        .then((recipe) => {
-          client.close();
-
-          if (recipe) {
-            res.render("recipe", { recipe: recipe, title: recipe.title }); //pass the document to the view
-          } else {
-            res.status(404).send("Recipe not found");
-          }
-        })
-        .catch((error) => {
-          client.close();
-          console.log("db connection closed");
-          console.error(error);
-        });
-    })
-    .catch(console.error);
+    var recipe = Recipe.findById(recipeId)
+    console.log(recipe)
+  res.render("recipe", { recipe: recipe, title: recipe.title }); //pass the document to the view
 });
 
 module.exports = router;

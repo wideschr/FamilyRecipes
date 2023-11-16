@@ -5,9 +5,19 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var expressSession=require('express-session');
 const bodyParser = require('body-parser');
-const multer = require('multer'); //middleware for handling multipart/form-data, which is primarily used for uploading files
-const upload = multer({ dest: 'uploads/recipe-pictures' }); // 'uploads/recipe-pictures/' is the directory where the files will be saved
 
+//the section below is needed for file upload
+const multer = require('multer');
+const mime = require('mime-types');
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, 'uploads/recipe-pictures');
+  },
+  filename: function(req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + '.' + mime.extension(file.mimetype));
+  }
+});
+const upload = multer({ storage: storage });
 
 //routers
 var indexRouter = require('./routes/index');
@@ -26,7 +36,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public'))); //needed to access files in public directory
-app.use('/uploads', express.static('uploads')); //needed to access pictures/files in uploads directory
+app.use('/uploads/recipe-pictures', express.static(path.join(__dirname, 'uploads', 'recipe-pictures'))); //needed to access pictures/files in uploads directory
 app.use(expressSession({secret:'max', saveUninitialized:false, resave:false})); //needed for session.success and session.errors
 
 
