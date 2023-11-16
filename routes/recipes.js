@@ -233,20 +233,17 @@ router.put("/update/:id",
 );
 
 /* Delete recipe page. */
-router.delete("/delete/:id", function (req, res, next) {
+router.get("/delete/:id", function (req, res, next) {
   var recipeId = req.params.id;
 
   //delete recipe from db based on id
   try {
     Recipe.findByIdAndDelete(recipeId).exec();
+    res.redirect("/");
   } catch (error) {
     console.log(error);
     redirect("/recipe/" + recipeId);
   }  
-  
-  
-
-  res.render("index", { title: "Edit recipe" });
 });
 
 /* GET individual recipe page. */
@@ -254,9 +251,17 @@ router.get("/:id", function (req, res, next) {
   //get id from url
   var recipeId = req.params.id;
 
-  var recipe = Recipe.findById(recipeId).then((recipe) => {
+  var recipe = Recipe.findById(recipeId)
+  .then((recipe) => {
+    // Sort comments in descending order by 'published_on'
+    recipe.comments.sort((a, b) => new Date(b.published_on) - new Date(a.published_on));
+    
     res.render("recipe", { recipe: recipe, title: recipe.title });
+  })
+  .catch((err) => {
+    console.log(err);
   });
+
 });
 
 module.exports = router;

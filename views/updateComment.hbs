@@ -38,15 +38,7 @@
     class="grid sm:grid-cols-1 md:grid-cols-6 gap-4 w-4/5 mx-auto my-10 "
   >
 
-    {{! if successfully added reipe, show alert with success }}
-    {{#if success}}
-      <div
-        class="bg-green-100  text-green-700 px-4 py-3 rounded relative"
-        role="alert"
-      >
-        <strong class="font-bold">Congrats! That worked!</strong>
-      </div>
-    {{/if}}
+  
 
     <div class="flex col-span-6">
       {{! left part }}
@@ -226,11 +218,11 @@
                 style="color:#4E6C50"
             >Participate in the discussion</h4>
             <form
-              action="/comments/add/{{recipe._id}}"
+              action="/comments/update/{{comment._id}}"
               method="POST"
               class="mb-6 flex flex-col items-right"
             >
-                <input type="text" name="name" id="name" placeholder="Your name" required class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <input type="text" name="name" value="{{comment.name}}" disabled id="name" placeholder="Your name" required class="mb-2 bg-gray-50 border border-gray-300 text-gray-400 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
               <textarea
                 id="message"
@@ -239,14 +231,37 @@
                 placeholder="Write a comment and please remember to be nice..."
                 required
                 name="message"
-              ></textarea>
+              >{{comment.message}}</textarea>
+
+                  {{! if successfully added reipe, show alert with success }}
+                {{#if success}}
+                <div
+                    class="bg-green-100  text-green-700 px-4 py-3 rounded relative"
+                    role="alert"
+                >
+                    <strong class="font-bold">Congrats!</strong>
+                    <p class="block sm:inline">Your comment was edited</p>
+                </div>
+                {{/if}}
+
+                {{! if error, show alert with error }}
+                {{#if errors}}
+                    <div class="w-3/5 text-red-700 text-sm mb-4 rounded relative">
+                        <ul class="list-disc pl-5">
+                            {{#each errors}}
+                                <li>{{this.msg}}</li>
+                            {{/each}}  
+                        </ul>
+                        
+                    </div>
+                {{/if}}
 
               <div>
                 <button
                   type="submit"
                   class="btn-default inline-flex items-center py-2.5 px-4 font-medium text-center text-white  rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
                 >
-                  Post comment
+                  Update comment
                 </button>
               </div>
 
@@ -262,7 +277,8 @@
 
 {{! scripts }}
 <script>
-  //underline the links when hovered over const links =
+  //underline the links when hovered over 
+  const links =
   document.querySelectorAll('a'); links.forEach(link => {
   link.addEventListener('mouseover', () => {
   link.classList.replace('border-transparent', 'border-gray-100'); });
@@ -271,12 +287,9 @@
 
 </script>
 
-
-{{!-- script for comments ... button --}}
-{{#each recipe.comments}}
-  <script>
-    document.getElementById('dropdownCommentButton{{this._id}}').addEventListener('click',
-    function() { var dropdown = document.getElementById('dropdownComment{{this._id}}');
-    dropdown.classList.toggle('hidden'); console.log(dropdown) });
-  </script>
-{{/each}}
+{{!-- scroll to the bottom of the page because thats where you can update the comment --}}
+<script>
+  window.onload = function() {
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+</script>
