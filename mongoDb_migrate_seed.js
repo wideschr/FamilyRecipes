@@ -27,11 +27,13 @@ async function run() {
   // will create them automatically when you first write data.
   const dbName = "FamilyRecipes";
   const collectionNameRecipes = "recipes";
+  const collectionNameCategories = "categories";
 
   // Create references to the database and collection in order to run
   // operations on them.
   const database = client.db(dbName);
   const collectionRecipes = database.collection(collectionNameRecipes);
+  const collectionCategories = database.collection(collectionNameCategories);
 
   /*
    *  *** INSERT DOCUMENTS ***
@@ -140,11 +142,42 @@ async function run() {
     },
   ];
 
+  const categories = [
+    {
+      name: "Vegetarian",
+      description: "Vegetarian recipes",
+    },
+    {
+      name: "Soups",
+      description: "Soup recipes",
+    },
+    {
+      name: "Entrees",
+      description: "Entree recipes",
+    },
+    {
+      name: "Desserts",
+      description: "Dessert recipes",
+    },
+    {
+      name: "Drinks",
+      description: "Drink recipes",
+    },
+    {
+      name: "Main dishes",
+      description: "Main dish recipes",
+    },
+  ];
+
     
   try {
     //insert recipes
     const insertManyRecipes = await collectionRecipes.insertMany(recipes);
     console.log(`${insertManyRecipes.insertedCount} documents successfully inserted.\n`);
+
+    //insert categories
+    const insertManyCategories = await collectionCategories.insertMany(categories);
+    console.log(`${insertManyCategories.insertedCount} documents successfully inserted.\n`);
   } catch (err) {
     console.error(`Something went wrong trying to insert the new documents: ${err}\n`);
   }

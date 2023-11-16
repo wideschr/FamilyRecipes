@@ -5,6 +5,15 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var expressSession=require('express-session');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override'); //needed for PUT and DELETE requests
+
+
+
+//require mongoose and make connection to db (better to make connection here I think, otherwise i have to do it in each model)
+var mongoose = require("mongoose");
+mongoose.connect("mongodb+srv://sct:azertyuiop@familyrecipes.obygc6x.mongodb.net/FamilyRecipes?retryWrites=true&w=majority")
+  .then(() => console.log('Database connected successfully'))
+  .catch(err => console.error('Database connection error: ', err));
 
 //the section below is needed for file upload
 const multer = require('multer');
@@ -27,6 +36,7 @@ var recipeRouter = require('./routes/recipes');
 //start express
 var app = express();
 
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -34,6 +44,7 @@ app.set('view engine', 'hbs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(methodOverride('_method'));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public'))); //needed to access files in public directory
 app.use('/uploads/recipe-pictures', express.static(path.join(__dirname, 'uploads', 'recipe-pictures'))); //needed to access pictures/files in uploads directory

@@ -1,8 +1,6 @@
 //require mongoose and make connection to db
 var mongoose = require("mongoose");
-mongoose.connect("mongodb+srv://sct:azertyuiop@familyrecipes.obygc6x.mongodb.net/familyrecipes?retryWrites=true&w=majority")
-  .then(() => console.log('Database connected successfully'))
-  .catch(err => console.error('Database connection error: ', err));;
+
 
 //define schema
 var Schema = mongoose.Schema;
