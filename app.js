@@ -41,6 +41,20 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+// Set up express-handlebars
+var hbs = require('express-handlebars').create({
+  defaultLayout: '../layout',
+  extname: '.hbs',
+  partialsDir: [
+    // Path to your partials
+    path.join(__dirname, 'views/partials'),
+  ],
+  runtimeOptions: {
+    allowProtoPropertiesByDefault: true
+  }
+});
+
+app.engine('hbs', hbs.engine);
 
 app.use(logger('dev'));
 app.use(express.json());

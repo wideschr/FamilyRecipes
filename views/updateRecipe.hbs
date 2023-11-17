@@ -1,33 +1,5 @@
 {{! header }}
-<nav
-  class="md:flex md:justify-between md:items-center w-full py-4 px-10"
-  style="background-color: #395144;"
->
-  <div class="">
-    <a href="/">
-      <img class="h-10" src="/images/placeholder.png" alt="Logo" />
-    </a>
-  </div>
-
-  <a href="/" class="flex-grow text-gray-100 ml-10">
-    <h1 class="text-2xl uppercase flex-grow" style="color: #F0EBCE">Family
-      Recipes</h1>
-  </a>
-
-  <div class="flex items-center">
-
-    <a
-      href="/"
-      class="border-b-2 border-transparent text-medium uppercase mx-7 pt-1"
-      style="color: #F0EBCE"
-    >Overview</a>
-    <a
-      href="/recipe/add"
-      class="border-b-2 border-transparent text-medium text-gray-100 uppercase mx-7 pt-1"
-      style="color: #F0EBCE"
-    >Add Recipe</a>
-  </div>
-</nav>
+{{> _header}}
 
 {{! main }}
 <main>
@@ -296,11 +268,6 @@
 {{! scripts }}
 <script>
 
-  const links = document.querySelectorAll('a'); links.forEach(link => {
-  link.addEventListener('mouseover', () => {
-  link.classList.replace('border-transparent', 'border-gray-100'); });
-  link.addEventListener('mouseout', () => {
-  link.classList.replace('border-gray-100', 'border-transparent'); }); });
   document.getElementById('add-ingredient').addEventListener('click', function()
   { var newIngredientGroup = document.createElement('div');
   newIngredientGroup.className = 'flex'; var newIngredientInput =

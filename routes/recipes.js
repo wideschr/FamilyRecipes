@@ -158,7 +158,7 @@ router.get("/update/:id", function (req, res, next) {
   });
 });
 
-router.put("/update/:id",
+router.post("/update/:id",
 
   //get the file from the form
   upload.single("recipe-img"), //single file upload with name 'recipe-img'
@@ -215,7 +215,6 @@ router.put("/update/:id",
   
   //only then process request
   function (req, res, next) {
-    
     var recipeId = req.params.id;
     
     //collect the errors from the validation
@@ -226,11 +225,48 @@ router.put("/update/:id",
         req.session.success = false;
         res.redirect("/recipe/update/" + recipeId);
     } else {
-        console.log('hallo');
+        req.session.success = true;
+
+        //combine the ingredients and amounts into array of objects
+        var ingredients = req.body.ingredients;
+        var amounts = req.body.amounts;
+        var ingredientsObjects = ingredients.map((ingredient, index) => {
+          return { name: ingredient, quantity: amounts[index] };
+        });
+
+        //build path to picture
+        var picturePath = req.file
+          ? req.protocol +
+            "://" +
+            req.hostname +
+            ":" +
+            (req.app.settings.port || process.env.PORT) +
+            "/" +
+            req.file.path.replace(/\\/g, "/")
+          : undefined;
+
+        //update the recipe in the db
+        Recipe.findByIdAndUpdate(recipeId, {
+          title: req.body.title,
+          author: {name : req.body.author, email: req.body.email},
+          ingredients: ingredientsObjects,
+          prepTimeInMinutes: req.body.time,
+          summary: req.body.summary,
+          instructions: req.body.instructions,
+          category: req.body.category,
+          picture_url: req.file ? picturePath : undefined,
+          difficulty: req.body.difficulty,
+          servings: req.body.servings,
+        }, { new: true })
+          .then((updatedRecipe) => {
+            console.log("finalised");
+            res.render("recipe", {recipe: updatedRecipe, success: req.session.success});
+          })
+          .catch((err) => {
+            console.log(err);
+          });
     }
-    
-  }
-);
+});
 
 /* Delete recipe page. */
 router.get("/delete/:id", function (req, res, next) {
@@ -250,13 +286,21 @@ router.get("/delete/:id", function (req, res, next) {
 router.get("/:id", function (req, res, next) {
   //get id from url
   var recipeId = req.params.id;
-
+  console.log(recipeId);
   var recipe = Recipe.findById(recipeId)
   .then((recipe) => {
     // Sort comments in descending order by 'published_on'
     recipe.comments.sort((a, b) => new Date(b.published_on) - new Date(a.published_on));
+
+    //get the latest 5 recipes in the same category to put in the side bar
+    Recipe.find({category:recipe.category}).sort({ _id: -1 }).limit(5)
+      .then((latestRecipes) => {
+        res.render("recipe", { recipe: recipe, latestRecipes: latestRecipes });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
     
-    res.render("recipe", { recipe: recipe, title: recipe.title });
   })
   .catch((err) => {
     console.log(err);

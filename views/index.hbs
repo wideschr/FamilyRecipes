@@ -1,33 +1,5 @@
 {{! header }}
-<nav
-  class="md:flex md:justify-between md:items-center w-full py-4 px-10"
-  style="background-color: #395144;"
->
-  <div class="">
-    <a href="/">
-      <img class="h-10" src="/images/placeholder.png" alt="Logo" />
-    </a>
-  </div>
-
-  <a href="/" class="flex-grow text-gray-100 ml-10">
-    <h1 class="text-2xl uppercase flex-grow"
-    style="color: #F0EBCE">Family Recipes</h1>
-  </a>
-
-  <div class="flex items-center">
-
-    <a
-      href="/"
-      class="border-b-2 border-transparent text-medium uppercase mx-7 pt-1"
-      style="color: #F0EBCE"
-    >Overview</a>
-    <a
-      href="/recipe/add"
-      class="border-b-2 border-transparent text-medium text-gray-100 uppercase mx-7 pt-1"
-      style="color: #F0EBCE"
-    >Add Recipe</a>
-  </div>
-</nav>
+{{> _header}}
 
 {{! main }}
 <main>
@@ -43,12 +15,11 @@
     >Overview</h2>
 
     {{! search bar }}
-    <form method="GET" action="#" class="w-2/5">
+    <form method="GET" action="/search" class="w-2/5">
       <input
         type="text"
-        name="search"
+        name="q"
         placeholder="Search..."
-        value=""
         class="block w-full mb-20 py-2 pl-3 text-medium text-gray-700 border border-gray-100 rounded-2xl bg-gray-100 focus:ring-blue-500 focus:border-gray-700"
       />
     </form>
@@ -58,19 +29,26 @@
   {{! recipe cards }}
   <div class="grid sm:grid-cols-1 md:grid-cols-6 lg:grid-cols-6 gap-10 w-4/5 mx-auto mt-10">
 
+      {{#if errors}}
+          <div class="col-span-6 mx-auto text-lg text-gray-700  mb-4 rounded relative">
+              {{#each errors}}
+                  <p class="text-center">{{this.msg}}</p>
+              {{/each}} 
+          </div>
+      {{/if}}
+
+
     {{#each recipes}}
-
-
       <div
         class="flex col-span-3  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
       >
-        <div style="background-image:url(images/food.jpg); background-size: cover; height:cover; width:30%">
+        <div style="background-image:url({{this.picture_url}}); background-size: cover; height:cover; min-width:30%">
             <a href="/recipe/{{this._id}}">
                 
             </a>
         </div>
         
-        <div class=" pt-2 flex-grow">
+        <div class=" pt-2 overflow-auto">
             
             <div class="flex justify-end mr-5">
                <span class="text-xs font-medium  px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"
@@ -79,15 +57,15 @@
                 </span>
             </div>
             
-            <div class="py-2 px-5 flex-grow"
-                    style="">
+            <div class="py-2 px-5 "
+                    style="max-width: 95%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
                     
                     
 
                     <a href="/recipe/{{this._id}}">
                         <h5
-                        class="text-xl font-bold wrap uppercase tracking-tight text-gray-900 dark:text-white"
-                        style="color: #395144; "
+                        class="text-lg font-bold uppercase tracking-tight text-gray-900 dark:text-white"
+                        style="color: #395144; white-space:wrap; text-overflow: ellipsis;"
                         >{{this.title}}</h5>
                     </a>
 
@@ -153,13 +131,3 @@
   </div>
 </main>
 
-{{! scripts }}
-<script>
-  //underline the links when hovered over const links =
-  document.querySelectorAll('a'); links.forEach(link => {
-  link.addEventListener('mouseover', () => {
-  link.classList.replace('border-transparent', 'border-gray-100'); });
-  link.addEventListener('mouseout', () => {
-  link.classList.replace('border-gray-100', 'border-transparent'); }); });
-
-</script>

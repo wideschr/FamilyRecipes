@@ -1,33 +1,5 @@
 {{! header }}
-<nav
-  class="md:flex md:justify-between md:items-center w-full py-4 px-10"
-  style="background-color: #395144;"
->
-  <div class="">
-    <a href="/">
-      <img class="h-10" src="/images/placeholder.png" alt="Logo" />
-    </a>
-  </div>
-
-  <a href="/" class="flex-grow text-gray-100 ml-10">
-    <h1 class="text-2xl uppercase flex-grow"
-    style="color: #F0EBCE">Family Recipes</h1>
-  </a>
-
-  <div class="flex items-center">
-
-    <a
-      href="/"
-      class="border-b-2 border-transparent text-medium uppercase mx-7 pt-1"
-      style="color: #F0EBCE"
-    >Overview</a>
-    <a
-      href="/recipe/add"
-      class="border-b-2 border-transparent text-medium text-gray-100 uppercase mx-7 pt-1"
-      style="color: #F0EBCE"
-    >Add Recipe</a>
-  </div>
-</nav>
+{{> _header}}
 
 {{! main }}
 <main>
@@ -41,10 +13,11 @@
     {{! if successfully added reipe, show alert with success }}
     {{#if success}}
       <div
-        class="bg-green-100  text-green-700 px-4 py-3 rounded relative"
+        class="col-span-6 text-center bg-green-100  text-green-700 px-4 py-3 rounded relative"
         role="alert"
+        id="alert"
       >
-        <strong class="font-bold">Congrats! That worked!</strong>
+        <strong class=" font-bold">Congrats! That worked!</strong>
       </div>
     {{/if}}
 
@@ -57,11 +30,109 @@
           src="{{recipe.picture_url}}"
           alt=""
         />
+
         <div class="mt-5 m-x-5">
             <a href="/recipe/delete/{{recipe._id}}" class="bg-red-500 text-white border borderred-500 px-3 py-1 rounded-lg hover:bg-red-700">Delete</a>
             <a href="/recipe/update/{{recipe._id}}" class=" text-gray-700 border border-gray-500 px-3 py-1 rounded-lg hover:bg-gray-100">Edit</a>
         </div>
+
+        {{!-- last uploads --}}
+        <h4
+            class="mb-3 mt-32 text-2xl font-extrabold dark:text-white"
+            style="color:#4E6C50"
+        >Other {{recipe.category}} recipes</h4>
+        <div class="flex flex-col ">
+              {{#each latestRecipes}}
+                <div
+                  class="flex col-span-3 mr-5 my-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                >
+                  <div style="background-image:url({{this.picture_url}}); background-size: cover; height:cover; min-width:30%">
+                      <a href="/recipe/{{this._id}}">
+                          
+                      </a>
+                  </div>
+                  
+                  <div class=" pt-2 overflow-auto">
+                      
+                      <div class="flex justify-end mr-5">
+                        <span class="text-xs font-medium  px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"
+                              style="background-color: #F0EBCE; color:#395144">
+                              {{this.category}}
+                          </span>
+                      </div>
+                      
+                      <div class="py-2 px-5 "
+                              style="max-width: 95%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                              
+                              
+
+                              <a href="/recipe/{{this._id}}">
+                                  <h5
+                                  class="text-lg font-bold uppercase tracking-tight text-gray-900 dark:text-white"
+                                  style="color: #395144; white-space:wrap; text-overflow: ellipsis;"
+                                  >{{this.title}}</h5>
+                              </a>
+
+                                  <div class="flex justify-between my-3">
+                                          <div  class="flex flex-col items-center justify-center">
+                                              <img src="images/icon_user.png" alt="" width="15rem" class="pb-1"/>
+                                              <p
+                                              class="text-center  text-xs text-gray-500 dark:text-gray-400"
+                                              >{{this.author.name}}</p>
+                                          </div>
+                                          <div  class="flex flex-col items-center justify-center">
+                                              <img src="images/icon_clock.png" alt=""  width="15rem" class="pb-1"/>
+                                              <p
+                                              class="text-center  text-xs text-gray-500 dark:text-gray-400"
+                                              >{{this.prepTimeInMinutes}} min.</p>
+                                          </div>
+                                          <div  class="flex flex-col items-center justify-center">
+                                              <img src="images/icon_speedometer.png" alt=""  width="15rem" class="pb-1"/>
+                                              <p
+                                              class=" text-center  text-xs text-gray-500 dark:text-gray-400"
+                                              >{{this.difficulty}}</p>
+                                          </div>
+                                      
+                                  </div>
+
+                              <p
+                                  class="mb-3 font-normal text-gray-700 dark:text-gray-400"
+                                  style="max-width: 90%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;color:#AA8B56"
+                              >{{this.summary}}</p>
+                              
+                              <div class="flex justify-end">
+                                  <a
+                                  href="/recipe/{{this._id}}"
+                                  class="btn-default inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg   dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                  >
+
+                                  <svg
+                                      class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+                                      aria-hidden="true"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="none"
+                                      viewBox="0 0 14 10"
+                                  >
+                                      <path
+                                      stroke="currentColor"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M1 5h12m0 0L9 1m4 4L9 9"
+                                      />
+                                  </svg>
+                                  </a>
+                              </div>
+                              
+                              </div>
+                  </div>
+                  
+
+                </div>
+
+              {{/each}}
         </div>
+      </div>
 
       {{! right part }}
       <div class="flex flex-col w-3/5 pl-10">
@@ -262,12 +333,10 @@
 
 {{! scripts }}
 <script>
-  //underline the links when hovered over const links =
-  document.querySelectorAll('a'); links.forEach(link => {
-  link.addEventListener('mouseover', () => {
-  link.classList.replace('border-transparent', 'border-gray-100'); });
-  link.addEventListener('mouseout', () => {
-  link.classList.replace('border-gray-100', 'border-transparent'); }); });
+  // close alert after 5 seconds
+  setTimeout(function() {
+    document.getElementById('alert').classList.add('hidden');
+  }, 3000);
 
 </script>
 
