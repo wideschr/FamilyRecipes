@@ -8,8 +8,8 @@ This platform is designed to help you collect, preserve, and share your family's
 
 ### Features Under Development
 
-- **User Authentication:** Currently, anyone can edit or delete comments and recipes. As there's no login system yet, implementing proper user authentication is a priority.
-- **Enhanced CRUD Operations:** Developing Create, Read, Update, and Delete (CRUD) routes for recipes to ensure better control and management.
+- **User Authentication:** Currently, anyone can edit or delete comments and recipes. As there's no login system yet, implementing proper user authentication would be a priority going forward.
+
 
 ## Technologies & Resources Used
 
