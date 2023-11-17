@@ -9,6 +9,7 @@ This platform is designed to help you collect, preserve, and share your family's
 ### Features Under Development
 
 - **User Authentication:** Currently, anyone can edit or delete comments and recipes. As there's no login system yet, implementing proper user authentication would be a priority going forward.
+- **Dummy Data** Currently, most of the data in the website is dummy data. This also makes that the images for the recipes are all the same if no custom recipes have been added.
 
 
 ## Technologies & Resources Used

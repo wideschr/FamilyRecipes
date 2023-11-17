@@ -1,0 +1,95 @@
+{{! header }}
+{{> _header}}
+
+{{! main }}
+<main>
+    {{! Page title section }}
+    {{> _pageTitle_no_search}}
+
+    {{! recipe cards }}
+    <div class=" w-3/5 mx-auto mt-10">
+
+        
+            <h2 class="mb-4 mt-16 text-4xl font-bold leading-none tracking-tight text-gray-900  dark:text-white"
+          style="color: #395144;">Overview</h2>
+            <p class="text-gray-700 mt-2 mb-4">This platform is designed to help you collect, preserve, and share your
+                family's culinary heritage. While it's still a work in progress and there are a few functionalities in
+                development, the core features aim to facilitate a seamless experience in organizing and showcasing your
+                family's recipes.</p>
+
+            <h3 class="mb-3 mt-6 text-2xl font-bold dark:text-white" style="color:#AA8B56">Features Under Development</h3>
+            <ul class="list-disc list-inside text-gray-700 mt-2 mb-4">
+                <li><span class="font-semibold">User Authentication:</span> Currently, anyone can edit or delete
+                    comments and recipes. As there's no login system yet, implementing proper user authentication is a
+                    priority.</li>
+                <li><span class="font-semibold">Dummy Data:</span> CCurrently, most of the data in the website is dummy data. This also makes that the images for the recipes are all the same if no custom recipes have been added.</li>
+            </ul>
+
+            <h2 class="mb-4 mt-16 text-4xl font-bold leading-none tracking-tight text-gray-900  dark:text-white"
+          style="color: #395144;">Technologies & Resources Used</h2>
+            <div class="mt-2 mb-4">
+                <h3 class="mb-3 mt-6 text-2xl font-bold dark:text-white" style="color:#AA8B56">Backend Tools & Frameworks</h3>
+                <ul class="list-disc list-inside text-gray-700">
+                    <li><span class="font-semibold">Validation:</span> Leveraging <a
+                            href="https://www.npmjs.com/package/express-validator" class="text-blue-500">Express
+                            Validator</a> for data validation.</li>
+                    <li><span class="font-semibold">Sessions:</span> Utilizing <a
+                            href="https://github.com/expressjs/session" class="text-blue-500">Express Session</a> for
+                        session management.</li>
+                    <li><span class="font-semibold">Database:</span> Employing MongoDB and Mongoose for database interactions.</li>
+                        <li><span class="font-semibold">Data Generation:</span> Utilizing <a
+                            href="https://json-generator.com/" class="text-blue-500">[JSON Generator]</a> f to generate content</li>
+                </ul>
+            </div>
+
+            <h2 class="mb-4 mt-16 text-4xl font-bold leading-none tracking-tight text-gray-900  dark:text-white"
+          style="color: #395144;">Learning Resources</h2>
+            <div class="mt-2 mb-4">
+                <h3 class="mb-3 mt-6 text-2xl font-bold dark:text-white" style="color:#AA8B56">Learning Materials</h3>
+                <ul class="list-disc list-inside text-gray-700">
+                    <li>Found valuable guidance from these YouTube playlists and tutorials:
+                        <ul class="list-disc list-inside text-gray-700 ml-4">
+                            <li><a href="https://www.youtube.com/playlist?list=PL55RiY5tL51oGJorjEgl6NVeDbx_fO5jR"
+                                    class="text-blue-500">YouTube Playlist 1</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=ofme2o29ngU" class="text-blue-500">YouTube
+                                    Tutorial</a></li>
+                            <!-- Add more learning resources -->
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3 class="mb-3 mt-6 text-2xl font-bold dark:text-white" style="color:#AA8B56">Platforms for Queries:</h3>
+                <ul class="list-disc list-inside text-gray-700">
+                    <li>Relying on Stack Overflow, Chat-GPT, and GitHub Copilot for problem-solving and coding assistance.
+                    </li>
+                </ul>
+            </div>
+
+            <h2 class="mb-4 mt-16 text-4xl font-bold leading-none tracking-tight text-gray-900  dark:text-white"
+          style="color: #395144;">Design & UI</h2>
+            <div class="mt-2 mb-4">
+                <h3 class="mb-3 mt-6 text-2xl font-bold dark:text-white" style="color:#AA8B56">Color Palette</h3>
+                <p class="text-gray-700">Using colors from <a
+                        href="https://colorhunt.co/palette/3951444e6c50aa8b56f0ebce" class="text-blue-500">Color
+                        Hunt</a> to create an engaging visual experience.</p>
+                <h3 class="mb-3 mt-6 text-2xl font-bold dark:text-white" style="color:#AA8B56">Layouts</h3>
+                <p class="text-gray-700">Employing <a href="https://flowbite.com/" class="text-blue-500">Flowbite</a>
+                    for designing intuitive and responsive layouts.</p>
+            </div>
+
+            <h2 class="mb-4 mt-16 text-4xl font-bold leading-none tracking-tight text-gray-900  dark:text-white"
+          style="color: #395144;">Getting Started</h2>
+            <p class="text-gray-700 mt-2 mb-4">To get the project in your IDE, clone the repository from <a
+                    href="https://github.com/wideschr/FamilyRecipes" class="text-blue-500">GitHub</a>.</p>
+            <p class="text-gray-700">Then, open the terminal and type:</p>
+            <pre class="bg-gray-200 rounded-lg p-4 text-sm font-mono mt-2">npm run watch</pre>
+            <p class="text-gray-700 mt-4">This command will start the project.</p>
+            <p class="text-gray-700 mt-4">Please note that while the project might have some incomplete functionalities
+                due to time constraints, efforts have been made to establish a groundwork akin to the Laravel project's
+                logic.</p>
+        
+
+    </div>
+</main>
+
+{{> _footer}}
