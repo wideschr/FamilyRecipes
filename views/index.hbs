@@ -4,130 +4,26 @@
 {{! main }}
 <main>
   {{! Page title section }}
-  <div
-    class="flex flex-col items-center justify-around"
-    style=" background-image: url(/images/background.jpg); background-repeat: no-repeat; background-size:cover; min-height: 40vh; background-position:0 -20rem  ;"
-  >
-
-    <h2
-      class="text-5xl font-bold uppercase text-gray-100 p-5 mt-20"
-      style="letter-spacing:0.9rem; color: #F0EBCE; "
-    >Overview</h2>
-
-    {{! search bar }}
-    <form method="GET" action="/search" class="w-2/5">
-      <input
-        type="text"
-        name="q"
-        placeholder="Search..."
-        class="block w-full mb-20 py-2 pl-3 text-medium text-gray-700 border border-gray-100 rounded-2xl bg-gray-100 focus:ring-blue-500 focus:border-gray-700"
-      />
-    </form>
-
-  </div>
+  {{> _pageTitle_search}}
 
   {{! recipe cards }}
   <div class="grid sm:grid-cols-1 md:grid-cols-6 lg:grid-cols-6 gap-10 w-4/5 mx-auto mt-10">
 
-      {{#if errors}}
-          <div class="col-span-6 mx-auto text-lg text-gray-700  mb-4 rounded relative">
-              {{#each errors}}
-                  <p class="text-center">{{this.msg}}</p>
-              {{/each}} 
-          </div>
-      {{/if}}
+    {{#if errors}}
+    <div class="col-span-6 mx-auto text-lg text-gray-700  mb-4 rounded relative">
+      {{#each errors}}
+      <p class="text-center">{{this.msg}}</p>
+      {{/each}}
+    </div>
+    {{/if}}
 
 
     {{#each recipes}}
-      <div
-        class="flex col-span-3  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-      >
-        <div style="background-image:url({{this.picture_url}}); background-size: cover; height:cover; min-width:30%">
-            <a href="/recipe/{{this._id}}">
-                
-            </a>
-        </div>
-        
-        <div class=" pt-2 overflow-auto">
-            
-            <div class="flex justify-end mr-5">
-               <span class="text-xs font-medium  px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"
-                    style="background-color: #F0EBCE; color:#395144">
-                    {{this.category}}
-                </span>
-            </div>
-            
-            <div class="py-2 px-5 "
-                    style="max-width: 95%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-                    
-                    
-
-                    <a href="/recipe/{{this._id}}">
-                        <h5
-                        class="text-lg font-bold uppercase tracking-tight text-gray-900 dark:text-white"
-                        style="color: #395144; white-space:wrap; text-overflow: ellipsis;"
-                        >{{this.title}}</h5>
-                    </a>
-
-                        <div class="flex justify-between my-3">
-                                <div  class="flex flex-col items-center justify-center">
-                                    <img src="images/icon_user.png" alt="" width="15rem" class="pb-1"/>
-                                    <p
-                                    class="text-center  text-xs text-gray-500 dark:text-gray-400"
-                                    >{{this.author.name}}</p>
-                                </div>
-                                <div  class="flex flex-col items-center justify-center">
-                                    <img src="images/icon_clock.png" alt=""  width="15rem" class="pb-1"/>
-                                    <p
-                                    class="text-center  text-xs text-gray-500 dark:text-gray-400"
-                                    >{{this.prepTimeInMinutes}} min.</p>
-                                </div>
-                                <div  class="flex flex-col items-center justify-center">
-                                    <img src="images/icon_speedometer.png" alt=""  width="15rem" class="pb-1"/>
-                                    <p
-                                    class=" text-center  text-xs text-gray-500 dark:text-gray-400"
-                                    >{{this.difficulty}}</p>
-                                </div>
-                            
-                        </div>
-
-                    <p
-                        class="mb-3 font-normal text-gray-700 dark:text-gray-400"
-                        style="max-width: 90%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;color:#AA8B56"
-                    >{{this.summary}}</p>
-                    
-                    <div class="flex justify-end">
-                        <a
-                        href="/recipe/{{this._id}}"
-                        class="btn-default inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg   dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        >
-
-                        <svg
-                            class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 14 10"
-                        >
-                            <path
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M1 5h12m0 0L9 1m4 4L9 9"
-                            />
-                        </svg>
-                        </a>
-                    </div>
-                    
-                    </div>
-        </div>
-        
-
-      </div>
+    {{> _card}}
 
     {{/each}}
 
   </div>
 </main>
 
+{{> _footer}}

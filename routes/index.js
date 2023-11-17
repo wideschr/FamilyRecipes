@@ -31,17 +31,22 @@ router.get("/search", function (req, res, next) {
   }) // Find recipes with a title or category that matches the query
     .then((recipes) => {
       if (recipes.length == 0) {
-        console.log("No recipes found.")
         req.session.success = false;
         req.session.errors = [{ msg: "No recipes found with this query. Try again or add a new recipe." }];
         res.render("index", {
           recipes: recipes, success: req.session.success, errors: req.session.errors
         });
+
+        req.session.errors = null; //reset the errors of the session after displaying them
+        req.session.success = null;
       } else {
         req.session.success = true;
         res.render("index", {
           recipes: recipes, success: req.session.success
         });
+        
+        req.session.errors = null; //reset the errors of the session after displaying them
+        req.session.success = null;
       }
 
     })

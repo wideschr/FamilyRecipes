@@ -3,134 +3,40 @@
 
 {{! main }}
 <main>
- 
+
 
   {{! recipe }}
-  <div
-    class="grid sm:grid-cols-1 md:grid-cols-6 gap-4 w-4/5 mx-auto my-10 "
-  >
+  <div class="grid sm:grid-cols-1 md:grid-cols-6 gap-4 w-4/5 mx-auto my-10 ">
 
     {{! if successfully added reipe, show alert with success }}
     {{#if success}}
-      <div
-        class="col-span-6 text-center bg-green-100  text-green-700 px-4 py-3 rounded relative"
-        role="alert"
-        id="alert"
-      >
-        <strong class=" font-bold">Congrats! That worked!</strong>
-      </div>
+    <div class="col-span-6 text-center bg-green-100  text-green-700 px-4 py-3 rounded relative" role="alert" id="alert">
+      <strong class=" font-bold">Congrats! That worked!</strong>
+    </div>
     {{/if}}
 
     <div class="flex col-span-6">
       {{! left part }}
       <div class="w-2/5 flex-grow ">
         {{! image }}
-        <img
-          class="object-cover w-full rounded-xl"
-          src="{{recipe.picture_url}}"
-          alt=""
-        />
+        <img class="object-cover w-full rounded-xl" src="{{recipe.picture_url}}" alt=""/>
 
         <div class="mt-5 m-x-5">
-            <a href="/recipe/delete/{{recipe._id}}" class="bg-red-500 text-white border borderred-500 px-3 py-1 rounded-lg hover:bg-red-700">Delete</a>
-            <a href="/recipe/update/{{recipe._id}}" class=" text-gray-700 border border-gray-500 px-3 py-1 rounded-lg hover:bg-gray-100">Edit</a>
+          <a href="/recipe/delete/{{recipe._id}}"
+            class="bg-red-500 text-white border borderred-500 px-3 py-1 rounded-lg hover:bg-red-700">Delete</a>
+          <a href="/recipe/update/{{recipe._id}}"
+            class=" text-gray-700 border border-gray-500 px-3 py-1 rounded-lg hover:bg-gray-100">Edit</a>
         </div>
 
         {{!-- last uploads --}}
-        <h4
-            class="mb-3 mt-32 text-2xl font-extrabold dark:text-white"
-            style="color:#4E6C50"
-        >Other {{recipe.category}} recipes</h4>
+        <h4 class="mb-3 mt-32 text-2xl font-extrabold dark:text-white" style="color:#4E6C50">Other {{recipe.category}}
+          recipes</h4>
         <div class="flex flex-col ">
-              {{#each latestRecipes}}
-                <div
-                  class="flex col-span-3 mr-5 my-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-                >
-                  <div style="background-image:url({{this.picture_url}}); background-size: cover; height:cover; min-width:30%">
-                      <a href="/recipe/{{this._id}}">
-                          
-                      </a>
-                  </div>
-                  
-                  <div class=" pt-2 overflow-auto">
-                      
-                      <div class="flex justify-end mr-5">
-                        <span class="text-xs font-medium  px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"
-                              style="background-color: #F0EBCE; color:#395144">
-                              {{this.category}}
-                          </span>
-                      </div>
-                      
-                      <div class="py-2 px-5 "
-                              style="max-width: 95%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-                              
-                              
-
-                              <a href="/recipe/{{this._id}}">
-                                  <h5
-                                  class="text-lg font-bold uppercase tracking-tight text-gray-900 dark:text-white"
-                                  style="color: #395144; white-space:wrap; text-overflow: ellipsis;"
-                                  >{{this.title}}</h5>
-                              </a>
-
-                                  <div class="flex justify-between my-3">
-                                          <div  class="flex flex-col items-center justify-center">
-                                              <img src="images/icon_user.png" alt="" width="15rem" class="pb-1"/>
-                                              <p
-                                              class="text-center  text-xs text-gray-500 dark:text-gray-400"
-                                              >{{this.author.name}}</p>
-                                          </div>
-                                          <div  class="flex flex-col items-center justify-center">
-                                              <img src="images/icon_clock.png" alt=""  width="15rem" class="pb-1"/>
-                                              <p
-                                              class="text-center  text-xs text-gray-500 dark:text-gray-400"
-                                              >{{this.prepTimeInMinutes}} min.</p>
-                                          </div>
-                                          <div  class="flex flex-col items-center justify-center">
-                                              <img src="images/icon_speedometer.png" alt=""  width="15rem" class="pb-1"/>
-                                              <p
-                                              class=" text-center  text-xs text-gray-500 dark:text-gray-400"
-                                              >{{this.difficulty}}</p>
-                                          </div>
-                                      
-                                  </div>
-
-                              <p
-                                  class="mb-3 font-normal text-gray-700 dark:text-gray-400"
-                                  style="max-width: 90%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;color:#AA8B56"
-                              >{{this.summary}}</p>
-                              
-                              <div class="flex justify-end">
-                                  <a
-                                  href="/recipe/{{this._id}}"
-                                  class="btn-default inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg   dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                  >
-
-                                  <svg
-                                      class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-                                      aria-hidden="true"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      fill="none"
-                                      viewBox="0 0 14 10"
-                                  >
-                                      <path
-                                      stroke="currentColor"
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M1 5h12m0 0L9 1m4 4L9 9"
-                                      />
-                                  </svg>
-                                  </a>
-                              </div>
-                              
-                              </div>
-                  </div>
-                  
-
-                </div>
-
-              {{/each}}
+          {{#each latestRecipes}}
+            <div class="my-4">
+              {{> _card}}
+            </div>
+          {{/each}}
         </div>
       </div>
 
@@ -138,63 +44,35 @@
       <div class="flex flex-col w-3/5 pl-10">
         <h2
           class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white"
-            style="color: #395144;"
-        >{{recipe.title}}</h2>
+          style="color: #395144;">{{recipe.title}}</h2>
 
         {{! details }}
         <div class="flex mb-3">
           <div class="flex items-center">
-            <img
-              src="/images/icon_user.png"
-              alt=""
-              width="15rem"
-              class="mr-2"
-            />
-            <p
-              class="mr-5 font-normal text-gray-500 dark:text-gray-400"
-            >{{recipe.author.name}}</p>
+            <img src="/images/icon_user.png" alt="" width="15rem" class="mr-2" />
+            <p class="mr-5 font-normal text-gray-500 dark:text-gray-400">{{recipe.author.name}}</p>
           </div>
           <div class="flex items-center">
-            <img
-              src="/images/icon_clock.png"
-              alt=""
-              width="15rem"
-              class="mr-2"
-            />
-            <p
-              class="mr-5 font-normal text-gray-500 dark:text-gray-400"
-            >{{recipe.prepTimeInMinutes}}</p>
+            <img src="/images/icon_clock.png" alt="" width="15rem" class="mr-2" />
+            <p class="mr-5 font-normal text-gray-500 dark:text-gray-400">{{recipe.prepTimeInMinutes}}</p>
           </div>
           <div class="flex items-center">
-            <img
-              src="/images/icon_speedometer.png"
-              alt=""
-              width="15rem"
-              class="mr-2"
-            />
-            <p
-              class="mr-5 font-normal text-gray-500 dark:text-gray-400"
-            >{{recipe.difficulty}}</p>
+            <img src="/images/icon_speedometer.png" alt="" width="15rem" class="mr-2" />
+            <p class="mr-5 font-normal text-gray-500 dark:text-gray-400">{{recipe.difficulty}}</p>
           </div>
 
         </div>
 
         {{! ingredients }}
-        <h3
-          class="mb-3 mt-6 text-4xl font-extrabold dark:text-white"
-          style="color:#AA8B56"
-        >Ingredients</h3>
+        <h3 class="mb-3 mt-6 text-4xl font-extrabold dark:text-white" style="color:#AA8B56">Ingredients</h3>
         <ul class="list-disc list-inside">
           {{#each recipe.ingredients}}
-            <li class="w-full">{{this.name}} - {{this.quantity}}</li>
+          <li class="w-full">{{this.name}} - {{this.quantity}}</li>
           {{/each}}
         </ul>
 
         {{! instructions }}
-        <h3
-          class="mb-3 mt-6 text-4xl font-extrabold dark:text-white"
-          style="color:#AA8B56"
-        >Instructions</h3>
+        <h3 class="mb-3 mt-6 text-4xl font-extrabold dark:text-white" style="color:#AA8B56">Instructions</h3>
         <div>
           <p>
             {{recipe.instructions}}
@@ -202,121 +80,84 @@
         </div>
 
         {{! Comments }}
-        {{! script for toggle menu is  }}
-        <h3
-          class="mb-3 mt-6 text-4xl font-extrabold dark:text-white"
-          style="color:#AA8B56"
-        >Discussions</h3>
+        {{! script for toggle menu is }}
+        <h3 class="mb-3 mt-6 text-4xl font-extrabold dark:text-white" style="color:#AA8B56">Discussions</h3>
         <section class="bg-white dark:bg-gray-900 antialiased">
           <div class="">
 
             {{#each recipe.comments}}
-              <article
-                class="flex flex-col p-6 text-base bg-gray-50 rounded-xl dark:bg-gray-900 border-b border-gray-100 mb-4"
-              >
-                <div class="flex justify-between items-center mb-2">
-                  <div class="flex items-center">
-                    {{! user }}
-                    <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
-                        {{this.name}}
-                    </p>
-                    {{! published on }}
-                    <p class="text-sm text-gray-600 dark:text-gray-400"><time>
-                        {{this.published_on}}</time></p>
-                  </div>
-
-                  <div class="relative" id="comment-menu">
-                    <button
-                      id="dropdownCommentButton{{this._id}}"
-                      data-dropdown-toggle="dropdownComment{{this._id}}"
-                      class="relative inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-gray-50 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                      type="button"
-                    >
-                      <svg
-                        class="w-4 h-4"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor"
-                        viewBox="0 0 16 3"
-                      >
-                        <path
-                          d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"
-                        />
-                      </svg>
-                      <span class="sr-only">Comment settings</span>
-                    </button>
-                    {{! Dropdown menu }}
-                    <div
-                      id="dropdownComment{{this._id}}"
-                      class="absolute right-0 hidden z-10 w-36 bg-white rounded divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
-                      role="menu"
-                      aria-orientation="vertical"
-                      aria-labelledby="comment-menu-button"
-                    >
-                      <ul
-                        class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                        aria-labelledby="dropdownMenuIconHorizontalButton"
-                      >
-
-                        <li>
-                          <form action="/comments/delete/{{this._id}}" method="post">
-                            <button
-                              type="submit"
-                              class="text-left w-full block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                              role="menuitem"
-                            >Remove</button>
-                          </form>
-                        </li>
-                        <li>
-                          <form action="/comments/update/{{this._id}}" method="get">
-                            <button
-                              type="submit"
-                              class="text-left w-full block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                              role="menuitem"
-                            >edit</button>
-                          </form>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-
+            <article
+              class="flex flex-col p-6 text-base bg-gray-50 rounded-xl dark:bg-gray-900 border-b border-gray-100 mb-4">
+              <div class="flex justify-between items-center mb-2">
+                <div class="flex items-center">
+                  {{! user }}
+                  <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
+                    {{this.name}}
+                  </p>
+                  {{! published on }}
+                  <p class="text-sm text-gray-600 dark:text-gray-400"><time>
+                      {{this.published_on}}</time></p>
                 </div>
 
-                {{! body }}
-                <p 
-                  class="text-gray-500 text-medium dark:text-gray-400 whitespace-wrap"
-                >{{this.message}}</p>
+                <div class="relative" id="comment-menu">
+                  <button id="dropdownCommentButton{{this._id}}" data-dropdown-toggle="dropdownComment{{this._id}}"
+                    class="relative inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-gray-50 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                    type="button">
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                      viewBox="0 0 16 3">
+                      <path
+                        d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                    </svg>
+                    <span class="sr-only">Comment settings</span>
+                  </button>
+                  {{! Dropdown menu }}
+                  <div id="dropdownComment{{this._id}}"
+                    class="absolute right-0 hidden z-10 w-36 bg-white rounded divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+                    role="menu" aria-orientation="vertical" aria-labelledby="comment-menu-button">
+                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                      aria-labelledby="dropdownMenuIconHorizontalButton">
 
-              </article>
+                      <li>
+                        <form action="/comments/delete/{{this._id}}" method="post">
+                          <button type="submit"
+                            class="text-left w-full block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                            role="menuitem">Remove</button>
+                        </form>
+                      </li>
+                      <li>
+                        <form action="/comments/update/{{this._id}}" method="get">
+                          <button type="submit"
+                            class="text-left w-full block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                            role="menuitem">edit</button>
+                        </form>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+
+              {{! body }}
+              <p class="text-gray-500 text-medium dark:text-gray-400 whitespace-wrap">{{this.message}}</p>
+
+            </article>
             {{/each}}
 
 
             {{! submit comments }}
-            <h4
-                class="mb-3 mt-6 text-2xl font-extrabold dark:text-white"
-                style="color:#4E6C50"
-            >Participate in the discussion</h4>
-            <form
-              action="/comments/add/{{recipe._id}}"
-              method="POST"
-              class="mb-6 flex flex-col items-right"
-            >
-                <input type="text" name="name" id="name" placeholder="Your name" required class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <h4 class="mb-3 mt-6 text-2xl font-extrabold dark:text-white" style="color:#4E6C50">Participate in the
+              discussion</h4>
+            <form action="/comments/add/{{recipe._id}}" method="POST" class="mb-6 flex flex-col items-right">
+              <input type="text" name="name" id="name" placeholder="Your name" required
+                class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
-              <textarea
-                id="message"
-                rows="6"
+              <textarea id="message" rows="6"
                 class="w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-300  dark:bg-gray-800 dark:border-gray-700"
-                placeholder="Write a comment and please remember to be nice..."
-                required
-                name="message"
-              ></textarea>
+                placeholder="Write a comment and please remember to be nice..." required name="message"></textarea>
 
               <div>
-                <button
-                  type="submit"
-                  class="btn-default inline-flex items-center py-2.5 px-4 font-medium text-center text-white  rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
-                >
+                <button type="submit"
+                  class="btn-default inline-flex items-center py-2.5 px-4 font-medium text-center text-white  rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
                   Post comment
                 </button>
               </div>
@@ -331,10 +172,12 @@
   </div>
 </main>
 
+{{> _footer}}
+
 {{! scripts }}
 <script>
   // close alert after 5 seconds
-  setTimeout(function() {
+  setTimeout(function () {
     document.getElementById('alert').classList.add('hidden');
   }, 3000);
 
@@ -343,9 +186,11 @@
 
 {{!-- script for comments ... button --}}
 {{#each recipe.comments}}
-  <script>
-    document.getElementById('dropdownCommentButton{{this._id}}').addEventListener('click',
-    function() { var dropdown = document.getElementById('dropdownComment{{this._id}}');
-    dropdown.classList.toggle('hidden'); console.log(dropdown) });
-  </script>
+<script>
+  document.getElementById('dropdownCommentButton{{this._id}}').addEventListener('click',
+    function () {
+      var dropdown = document.getElementById('dropdownComment{{this._id}}');
+      dropdown.classList.toggle('hidden'); console.log(dropdown)
+    });
+</script>
 {{/each}}

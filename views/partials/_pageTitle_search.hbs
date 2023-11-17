@@ -1,0 +1,22 @@
+
+<div
+    class="flex flex-col items-center justify-around"
+    style=" background-image: url(/images/background.jpg); background-repeat: no-repeat; background-size:cover; min-height: 40vh; background-position:0 -20rem  ;"
+  >
+
+    <h2
+      class="glass-effect text-5xl font-bold uppercase  "
+      style="letter-spacing:0.9rem;  "
+    >{{title}}</h2>
+
+    {{! search bar }}
+    <form method="GET" action="/search" class="w-2/5">
+      <input
+        type="text"
+        name="q"
+        placeholder="Search..."
+        class="block w-full mb-20 py-2 pl-3 text-medium text-gray-700 border border-gray-100 rounded-2xl bg-gray-100 focus:ring-blue-500 focus:border-gray-700"
+      />
+    </form>
+
+  </div>

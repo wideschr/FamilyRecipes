@@ -286,8 +286,8 @@ router.get("/delete/:id", function (req, res, next) {
 router.get("/:id", function (req, res, next) {
   //get id from url
   var recipeId = req.params.id;
-  console.log(recipeId);
-  var recipe = Recipe.findById(recipeId)
+
+  Recipe.findById(recipeId)
   .then((recipe) => {
     // Sort comments in descending order by 'published_on'
     recipe.comments.sort((a, b) => new Date(b.published_on) - new Date(a.published_on));

@@ -4,23 +4,7 @@
 {{! main }}
 <main>
   {{! Page title section }}
-  <div
-    class="flex flex-col items-center justify-around"
-    style=" background-image: url(/images/background.jpg); background-repeat: no-repeat; background-size:cover; min-height: 40vh; background-position:right top ;"
-  >
-
-    <h1
-      class="text-5xl font-bold uppercase text-gray-100 pb-3 pt-20"
-      style="letter-spacing:0.9rem;color: #F0EBCE"
-    >Edit Recipe</h1>
-
-    <h2
-      class="pb-10 text-center text-lg w-4/5 text-gray-200 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400 mx-auto"
-    >
-      Fill in the fields below to edit this family recipe.
-    </h2>
-
-  </div>
+  {{> _pageTitle_no_search}}
 
   {{! if no success, show alert with error }}
   {{#if errors}}
@@ -264,6 +248,8 @@
 
   </div>
 </main>
+
+{{> _footer}}
 
 {{! scripts }}
 <script>
