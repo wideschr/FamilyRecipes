@@ -1,15 +1,44 @@
 # FamilyRecipes
-A place to collect all of your family recipes
 
+Welcome to **FamilyRecipes**, the place where all your cherished family recipes find a home.
 
-validation: https://www.npmjs.com/package/express-validator
-sessions: https://github.com/expressjs/session
-learning: https://www.youtube.com/playlist?list=PL55RiY5tL51oGJorjEgl6NVeDbx_fO5jR
-https://www.youtube.com/watch?v=ofme2o29ngU
-database: MongDb
-generate content: https://json-generator.com/
+## Overview
 
+This platform is designed to help you collect, preserve, and share your family's culinary heritage. While it's still a work in progress and there are a few functionalities in development, the core features aim to facilitate a seamless experience in organizing and showcasing your family's recipes.
 
-Het is niet zo logisch dat elke user comments kan verwijderen en aanpassen van andere users, maar er is geen login systeem en ik wou alle CRUD routes opzetten. Hetzelfde geldt voor het bewerken en deleten van recepten.
+### Features Under Development
 
-Zo zijn er nog een aantal zaken die niet helemaal zijn uitgewerkt, maar mijn tijd was vrij beperkt. Ik heb dit wel allemaal gedaan voor het laravel project. En de logica zou min of meer hetzelfde zijn geweest hier.
+- **User Authentication:** Currently, anyone can edit or delete comments and recipes. As there's no login system yet, implementing proper user authentication is a priority.
+- **Enhanced CRUD Operations:** Developing Create, Read, Update, and Delete (CRUD) routes for recipes to ensure better control and management.
+
+## Technologies & Resources Used
+
+### Backend Tools & Frameworks
+- **Validation:** Leveraging [Express Validator](https://www.npmjs.com/package/express-validator) for data validation.
+- **Sessions:** Utilizing [Express Session](https://github.com/expressjs/session) for session management.
+- **Database:** Employing MongoDB and Mongoose for database interactions.
+- **Data Generation:** Using [JSON Generator](https://json-generator.com/) to generate content.
+
+### Learning Resources
+- **Learning Materials:** Found valuable guidance from these YouTube playlists and tutorials:
+  - [YouTube Playlist 1](https://www.youtube.com/playlist?list=PL55RiY5tL51oGJorjEgl6NVeDbx_fO5jR)
+  - [YouTube Tutorial](https://www.youtube.com/watch?v=ofme2o29ngU)
+- **Platforms for Queries:** Relying on Stack Overflow, Chat-GPT, and GitHub Copilot for problem-solving and coding assistance.
+
+### Design & UI
+- **Color Palette:** Using colors from [Color Hunt](https://colorhunt.co/palette/3951444e6c50aa8b56f0ebce) to create an engaging visual experience.
+- **Layouts:** Employing [Flowbite](https://flowbite.com/) for designing intuitive and responsive layouts.
+
+## Getting Started
+
+To get the project in your IDE, clone the repository from [GitHub](https://github.com/wideschr/FamilyRecipes).
+
+Then, open the terminal and type:
+
+```plaintext
+npm run watch
+```
+
+This command will start the project.
+
+Please note that while the project might have some incomplete functionalities due to time constraints, efforts have been made to establish a groundwork akin to the Laravel project's logic.
