@@ -37,6 +37,7 @@ To get the project in your IDE, clone the repository from [GitHub](https://githu
 Then, open the terminal and type:
 
 ```plaintext
+npm i
 npm run watch
 ```
 
