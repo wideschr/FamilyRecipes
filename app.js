@@ -6,12 +6,12 @@ var logger = require('morgan');
 var expressSession=require('express-session');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override'); //needed for PUT and DELETE requests
-
+const env = require('dotenv').config(); //needed for .env file
 
 
 //require mongoose and make connection to db (better to make connection here I think, otherwise i have to do it in each model)
 var mongoose = require("mongoose");
-mongoose.connect("mongodb+srv://sct:azertyuiop@familyrecipes.obygc6x.mongodb.net/FamilyRecipes?retryWrites=true&w=majority")
+mongoose.connect(`mongodb+srv://${process.env.MDB_USER}:${process.env.MDB_PASSWORD}@familyrecipes.obygc6x.mongodb.net/FamilyRecipes?retryWrites=true&w=majority`)
   .then(() => console.log('Database connected successfully'))
   .catch(err => console.error('Database connection error: ', err));
 

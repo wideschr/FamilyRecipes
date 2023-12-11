@@ -32,15 +32,36 @@ This platform is designed to help you collect, preserve, and share your family's
 
 ## Getting Started
 
-To get the project in your IDE, clone the repository from [GitHub](https://github.com/wideschr/FamilyRecipes).
+To begin working with the project in your IDE, follow these steps:
 
-Then, open the terminal and type:
+1. Clone the repository from [GitHub](https://github.com/wideschr/FamilyRecipes).
 
-```plaintext
-npm i
-npm run watch
-```
+2. Open your terminal and navigate to the project directory.
 
-This command will start the project.
+3. Create a `.env` file in the project root directory and define the `MDB_USER` and `MDB_PASSWORD` variables. For example:
+
+    ```
+    MDB_USER=your_username
+    MDB_PASSWORD=your_password
+    ```
+
+4. Once the `.env` file is set up, proceed to migrate the database. Run the following command in the terminal:
+
+    ```bash
+    node mongoDb_migrate_seed.js
+    ```
+
+    This command will handle the migration and seeding of the database according to the defined models and seeds.
+
+5. After the database migration is complete, you can start the project. Run the following commands:
+
+    ```bash
+    npm install
+    npm run watch
+    ```
+
+    This command will start the project.
+
+Now the project should be set up, the database should be migrated with initial data, and you can proceed to run the project.
 
 Please note that while the project might have some incomplete functionalities due to time constraints, efforts have been made to establish a groundwork akin to the Laravel project's logic.

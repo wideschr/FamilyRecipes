@@ -1,6 +1,7 @@
 //code coming from setup docs of mongoDB
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const ObjectId = require('mongodb').ObjectId;
+const env = require('dotenv').config();
 
 async function run() {
   // Replace the placeholder connection string below with your
@@ -8,7 +9,7 @@ async function run() {
   // a valid username and password! Note that in a production environment,
   // you do not want to store your password in plain-text here.
   const uri =
-    "mongodb+srv://sct:azertyuiop@familyrecipes.obygc6x.mongodb.net/?retryWrites=true&w=majority";
+    `mongodb+srv://${process.env.MDB_USER}:${process.env.MDB_PASSWORD}@familyrecipes.obygc6x.mongodb.net/?retryWrites=true&w=majority`;
 
   // Create a MongoClient with a MongoClientOptions object to set the Stable API version
   const client = new MongoClient(uri, {
