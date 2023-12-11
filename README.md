@@ -70,5 +70,3 @@ To begin working with the project in your IDE, follow these steps:
     This command will start the project.
 
 Now the project should be set up, the database should be migrated with initial data, and the project should be running successfully.
-
-Please note that while the project might have some incomplete functionalities due to time constraints, efforts have been made to establish a groundwork akin to the Laravel project's logic.
